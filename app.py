@@ -7,6 +7,10 @@ Original file is located at
     https://colab.research.google.com/drive/1qEwt249KEPH5uYbyt9oKs9U_Ulgp0gEz
 """
 
+!pip install --upgrade streamlit
+
+!pip show streamlit
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -32,4 +36,4 @@ with col2:
     petal_w = st.slider('Petal width (cm)', 0.1, 2.5, 0.5)
 
 st.button('Predict type of Iris')
-%run my_streamlit_app.py
+
