@@ -1,7 +1,10 @@
+pip install matplotlib
+import matplotlib
+matplotlib.use("agg")  # Gunakan "agg" sebagai backend untuk matplotlib
+import matplotlib.pyplot as plt
 # import libraries
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
