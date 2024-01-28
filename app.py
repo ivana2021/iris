@@ -55,7 +55,11 @@ st.write(f'The model accuracy on the test set is: {accuracy:.2%}')
 
 # visualization
 st.subheader('Data Distribution by Target Class')
+
+# Create a scatter plot using Seaborn
 fig, ax = plt.subplots()
 sns.scatterplot(x='sepal length (cm)', y='sepal width (cm)', hue='target', data=data, ax=ax)
+
+# Display the plot using Streamlit
 st.pyplot(fig)
 
