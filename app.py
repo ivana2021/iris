@@ -1,4 +1,3 @@
-pip install matplotlib
 import matplotlib
 matplotlib.use("agg")  # Gunakan "agg" sebagai backend untuk matplotlib
 import matplotlib.pyplot as plt
