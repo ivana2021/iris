@@ -1,8 +1,7 @@
-
-# import libraries
+ # import libraries
 import streamlit as st
 import pandas as pd
-import plotly.express as px  # Mengganti matplotlib dengan plotly
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
@@ -53,9 +52,17 @@ st.write(iris.target_names[prediction[0]])
 st.subheader('Model Accuracy:')
 st.write(f'The model accuracy on the test set is: {accuracy:.2%}')
 
-# visualization with plotly
+# visualization with matplotlib
 st.subheader('Data Distribution by Target Class')
 
-# Create a scatter plot using Plotly Express
-fig = px.scatter(data, x='sepal length (cm)', y='sepal width (cm)', color='target', title='Data Distribution by Target Class')
-st.plotly_chart(fig)
+# Create a scatter plot using Matplotlib
+fig, ax = plt.subplots()
+colors = ['red', 'green', 'blue']
+for i in range(3):
+    subset = data[data['target'] == i]
+    ax.scatter(subset['sepal length (cm)'], subset['sepal width (cm)'], label=f'Target {i}', color=colors[i])
+
+ax.set_xlabel('Sepal Length (cm)')
+ax.set_ylabel('Sepal Width (cm)')
+ax.legend()
+st.pyplot(fig)
