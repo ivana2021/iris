@@ -1,10 +1,7 @@
-import matplotlib
-matplotlib.use("agg")  # Gunakan "agg" sebagai backend untuk matplotlib
-import matplotlib.pyplot as plt
 # import libraries
 import streamlit as st
 import pandas as pd
-import seaborn as sns
+import plotly.express as px  # Mengganti matplotlib dengan plotly
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
@@ -55,13 +52,9 @@ st.write(iris.target_names[prediction[0]])
 st.subheader('Model Accuracy:')
 st.write(f'The model accuracy on the test set is: {accuracy:.2%}')
 
-# visualization
+# visualization with plotly
 st.subheader('Data Distribution by Target Class')
 
-# Create a scatter plot using Seaborn
-fig, ax = plt.subplots()
-sns.scatterplot(x='sepal length (cm)', y='sepal width (cm)', hue='target', data=data, ax=ax)
-
-# Display the plot using Streamlit
-st.pyplot(fig)
-
+# Create a scatter plot using Plotly Express
+fig = px.scatter(data, x='sepal length (cm)', y='sepal width (cm)', color='target', title='Data Distribution by Target Class')
+st.plotly_chart(fig)
