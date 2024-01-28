@@ -1,7 +1,8 @@
-#!pip install streamlit scikit-learn pandas
-# import library
+# import libraries
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
@@ -9,11 +10,11 @@ from sklearn import datasets
 
 # load dataset
 iris = datasets.load_iris()
-X = iris.data
-y = iris.target
+data = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+data['target'] = iris.target
 
 # split dataset
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(data.drop('target', axis=1), data['target'], test_size=0.2, random_state=42)
 
 # create and train the model
 model = RandomForestClassifier()
@@ -51,3 +52,10 @@ st.write(iris.target_names[prediction[0]])
 # display accuracy
 st.subheader('Model Accuracy:')
 st.write(f'The model accuracy on the test set is: {accuracy:.2%}')
+
+# visualization
+st.subheader('Data Distribution by Target Class')
+fig, ax = plt.subplots()
+sns.scatterplot(x='sepal length (cm)', y='sepal width (cm)', hue='target', data=data, ax=ax)
+st.pyplot(fig)
+
