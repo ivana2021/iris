@@ -1,7 +1,7 @@
- # import libraries
+# import libraries
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import altair as alt
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
@@ -52,17 +52,20 @@ st.write(iris.target_names[prediction[0]])
 st.subheader('Model Accuracy:')
 st.write(f'The model accuracy on the test set is: {accuracy:.2%}')
 
-# visualization with matplotlib
+# visualization with Altair
 st.subheader('Data Distribution by Target Class')
 
-# Create a scatter plot using Matplotlib
-fig, ax = plt.subplots()
-colors = ['red', 'green', 'blue']
-for i in range(3):
-    subset = data[data['target'] == i]
-    ax.scatter(subset['sepal length (cm)'], subset['sepal width (cm)'], label=f'Target {i}', color=colors[i])
+# Create a scatter plot using Altair
+scatter_plot = alt.Chart(data).mark_circle().encode(
+    x='sepal length (cm)',
+    y='sepal width (cm)',
+    color='target:N',
+    tooltip=['sepal length (cm)', 'sepal width (cm)']
+).properties(
+    width=500,
+    height=400
+)
 
-ax.set_xlabel('Sepal Length (cm)')
-ax.set_ylabel('Sepal Width (cm)')
-ax.legend()
-st.pyplot(fig)
+# Display the Altair chart using Streamlit
+st.altair_chart(scatter_plot, use_container_width=True)
+
